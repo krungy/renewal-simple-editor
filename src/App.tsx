@@ -1,9 +1,11 @@
-import normalize from "emotion-normalize";
-import { Global, css } from "@emotion/react";
+import { Provider } from 'react-redux';
+import normalize from 'emotion-normalize';
+import { Global, css } from '@emotion/react';
+import store from './store';
 
 export default function App() {
   return (
-    <>
+    <Provider store={store}>
       <Global
         styles={css`
           ${normalize}
@@ -15,6 +17,6 @@ export default function App() {
         `}
       />
       <>initial</>
-    </>
+    </Provider>
   );
 }
