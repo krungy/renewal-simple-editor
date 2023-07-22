@@ -1,6 +1,6 @@
-import styled from "@emotion/styled";
-import DefaultContainer from "modules/components/DefaultContainer";
-import Editor from "modules/components/Editor";
+import styled from '@emotion/styled';
+import DefaultContainer from 'modules/components/DefaultContainer';
+import Editor from 'modules/components/Editor';
 
 const MainContainer = () => {
   return (

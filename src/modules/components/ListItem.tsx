@@ -1,11 +1,11 @@
-import styled from "@emotion/styled";
-import { ListItemInterface } from "types/types";
+import styled from '@emotion/styled';
+import { ListItemInterface } from 'types/types';
 
 const ListItem = ({ id, title }: ListItemInterface) => {
   return (
     <ListItemStyle>
       {id}
-      {title ? title : "제목 없음"}
+      {title ? title : '제목 없음'}
       <ListButtonStyle data-id="deleteDocument">-</ListButtonStyle>
     </ListItemStyle>
   );

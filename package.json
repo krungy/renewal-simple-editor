@@ -18,7 +18,9 @@
   "scripts": {
     "start": "react-app-rewired start",
     "test:easy": "jest **/*/App.easy.spec.tsx",
-    "test:hard": "jest **/*/App.hard.spec.tsx"
+    "test:hard": "jest **/*/App.hard.spec.tsx",
+    "format": "prettier --check --ignore-path .gitignore .",
+    "format:fix": "prettier --write --ignore-path .gitignore ."
   },
   "eslintConfig": {
     "extends": [

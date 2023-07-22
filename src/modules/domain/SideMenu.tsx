@@ -1,15 +1,15 @@
-import styled from "@emotion/styled";
-import ListItem from "modules/components/ListItem";
+import styled from '@emotion/styled';
+import ListItem from 'modules/components/ListItem';
 
 const SideMenu = () => {
   const MOCK_DATA = [
     {
-      id: "1",
-      title: "test",
+      id: '1',
+      title: 'test',
     },
     {
-      id: "2",
-      title: "test",
+      id: '2',
+      title: 'test',
     },
   ];
 
@@ -17,8 +17,8 @@ const SideMenu = () => {
     <SideMenuStyle>
       <HeaderStyle>개인 페이지</HeaderStyle>
       <ListStyle>
-        {MOCK_DATA.map(({ id, title }) => (
-          <ListItem id={id} title={title} />
+        {MOCK_DATA.map(({ id, title }, index) => (
+          <ListItem id={id} title={title} key={index} />
         ))}
       </ListStyle>
       <AddButtonStyle>+</AddButtonStyle>

@@ -1,13 +1,9 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
 const Editor = () => {
   return (
     <>
-      <EditorInputStyle
-        type="text"
-        name="title"
-        placeholder="제목을 입력하세요."
-      />
+      <EditorInputStyle type="text" name="title" placeholder="제목을 입력하세요." />
       <EditorTextareaStyle
         // name="content"
         contentEditable="true"

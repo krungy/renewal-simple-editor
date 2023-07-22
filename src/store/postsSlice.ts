@@ -13,7 +13,7 @@ const postsSlice = createSlice({
   initialState,
   reducers: {
     test: (state, action) => {
-      state = action.payload;
+      return (state = action.payload);
     },
   },
 });
