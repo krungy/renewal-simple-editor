@@ -1,7 +1,8 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { ListInterface, ListItemInterface } from 'types/types';
 
 interface InitialStateInterface {
-  posts: [];
+  posts: ListInterface;
 }
 
 const initialState: InitialStateInterface = {
@@ -12,10 +13,12 @@ const postsSlice = createSlice({
   name: 'posts',
   initialState,
   reducers: {
-    test: (state, action) => {
-      return (state = action.payload);
+    addItem: (state, action: PayloadAction<ListItemInterface>) => {
+      state.posts = [...state.posts, action.payload];
     },
   },
 });
 
-export const { test } = postsSlice.actions;
+export const { addItem } = postsSlice.actions;
+
+export default postsSlice;
