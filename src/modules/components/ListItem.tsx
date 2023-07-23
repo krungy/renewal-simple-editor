@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { useAppDispatch } from 'store';
-import { removeItem } from 'store/postsSlice';
+import { changeSelectedPost, removeItem } from 'store/postsSlice';
 import { ListItemInterface } from 'types/types';
 
 interface ItemInterface {
@@ -9,12 +9,16 @@ interface ItemInterface {
 const ListItem = ({ item }: ItemInterface) => {
   const dispatch = useAppDispatch();
 
+  const onItemClick = () => {
+    dispatch(changeSelectedPost(item));
+  };
+
   const onDeleteClick = () => {
     dispatch(removeItem(item));
   };
 
   return (
-    <ListItemStyle>
+    <ListItemStyle onClick={() => onItemClick()}>
       {item.title ? item.title : '제목 없음'}
       <ListButtonStyle onClick={() => onDeleteClick()}>-</ListButtonStyle>
     </ListItemStyle>
