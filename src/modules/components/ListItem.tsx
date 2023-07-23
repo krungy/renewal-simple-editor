@@ -1,12 +1,22 @@
 import styled from '@emotion/styled';
+import { useAppDispatch } from 'store';
+import { removeItem } from 'store/postsSlice';
 import { ListItemInterface } from 'types/types';
 
-const ListItem = ({ id, title }: ListItemInterface) => {
+interface ItemInterface {
+  item: ListItemInterface;
+}
+const ListItem = ({ item }: ItemInterface) => {
+  const dispatch = useAppDispatch();
+
+  const onDeleteClick = () => {
+    dispatch(removeItem(item));
+  };
+
   return (
     <ListItemStyle>
-      {id}
-      {title ? title : '제목 없음'}
-      <ListButtonStyle data-id="deleteDocument">-</ListButtonStyle>
+      {item.title ? item.title : '제목 없음'}
+      <ListButtonStyle onClick={() => onDeleteClick()}>-</ListButtonStyle>
     </ListItemStyle>
   );
 };

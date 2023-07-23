@@ -1,27 +1,32 @@
 import styled from '@emotion/styled';
 import ListItem from 'modules/components/ListItem';
+import { RootState, useAppDispatch, useAppSelector } from 'store';
+import { addItem } from 'store/postsSlice';
+import { v4 as uuidv4 } from 'uuid';
 
 const SideMenu = () => {
-  const MOCK_DATA = [
-    {
-      id: '1',
-      title: 'test',
-    },
-    {
-      id: '2',
-      title: 'test',
-    },
-  ];
+  const { posts } = useAppSelector((state: RootState) => state.posts);
+  const dispatch = useAppDispatch();
+
+  const onAddClick = () => {
+    const newItem = {
+      id: uuidv4(),
+      title: '',
+      content: '',
+      child: [],
+    };
+    dispatch(addItem(newItem));
+  };
 
   return (
     <SideMenuStyle>
       <HeaderStyle>개인 페이지</HeaderStyle>
       <ListStyle>
-        {MOCK_DATA.map(({ id, title }, index) => (
-          <ListItem id={id} title={title} key={index} />
+        {posts.map((item, index) => (
+          <ListItem item={item} key={index} />
         ))}
       </ListStyle>
-      <AddButtonStyle>+</AddButtonStyle>
+      <AddButtonStyle onClick={() => onAddClick()}>+</AddButtonStyle>
     </SideMenuStyle>
   );
 };

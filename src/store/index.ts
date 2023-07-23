@@ -15,7 +15,7 @@ export const store = configureStore({
   enhancers: defaultEnhancers => [...defaultEnhancers],
 });
 
-// export type RootState = ReturnType<typeof store.getState>;
+export type RootState = ReturnType<typeof rootReducer>;
 export const useAppSelector = useSelector;
 export const useAppDispatch = () => useDispatch();
 

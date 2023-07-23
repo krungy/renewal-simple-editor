@@ -16,9 +16,12 @@ const postsSlice = createSlice({
     addItem: (state, action: PayloadAction<ListItemInterface>) => {
       state.posts = [...state.posts, action.payload];
     },
+    removeItem: (state, action: PayloadAction<ListItemInterface>) => {
+      state.posts = state.posts.filter(el => el.id !== action.payload.id);
+    },
   },
 });
 
-export const { addItem } = postsSlice.actions;
+export const { addItem, removeItem } = postsSlice.actions;
 
 export default postsSlice;
