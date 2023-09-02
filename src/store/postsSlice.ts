@@ -3,12 +3,12 @@ import { ListInterface, ListItemInterface } from 'types/types';
 
 interface InitialStateInterface {
   posts: ListInterface;
-  selectedPost: ListItemInterface | {};
+  selectedPost: ListItemInterface | null;
 }
 
 const initialState: InitialStateInterface = {
   posts: [],
-  selectedPost: {},
+  selectedPost: null,
 };
 
 const postsSlice = createSlice({
@@ -16,13 +16,23 @@ const postsSlice = createSlice({
   initialState,
   reducers: {
     addItem: (state, action: PayloadAction<ListItemInterface>) => {
-      state.posts = [...state.posts, action.payload];
+      return {
+        ...state,
+        posts: [...state.posts, action.payload],
+      };
     },
     removeItem: (state, action: PayloadAction<ListItemInterface>) => {
-      state.posts = state.posts.filter(el => el.id !== action.payload.id);
+      return {
+        ...state,
+        posts: state.posts.filter(el => el.id !== action.payload.id),
+        selectedPost: null,
+      };
     },
     changeSelectedPost: (state, action: PayloadAction<ListItemInterface>) => {
-      state.selectedPost = action.payload;
+      return {
+        ...state,
+        selectedPost: action.payload,
+      };
     },
   },
 });

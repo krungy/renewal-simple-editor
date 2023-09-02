@@ -13,14 +13,15 @@ const ListItem = ({ item }: ItemInterface) => {
     dispatch(changeSelectedPost(item));
   };
 
-  const onDeleteClick = () => {
+  const onDeleteClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
     dispatch(removeItem(item));
   };
 
   return (
     <ListItemStyle onClick={() => onItemClick()}>
       {item.title ? item.title : '제목 없음'}
-      <ListButtonStyle onClick={() => onDeleteClick()}>-</ListButtonStyle>
+      <ListButtonStyle onClick={e => onDeleteClick(e)}>-</ListButtonStyle>
     </ListItemStyle>
   );
 };
