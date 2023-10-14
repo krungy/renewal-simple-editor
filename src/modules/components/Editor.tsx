@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import useTimeoutFn from 'hooks/useTimeoutFn';
 import { useState } from 'react';
 import { RootState, useAppSelector } from 'store';
 import { ListItemInterface } from 'types/types';
@@ -7,15 +8,25 @@ const Editor = () => {
   const { selectedPost } = useAppSelector((state: RootState) => state.posts);
   const [editPost, setEditPost] = useState<ListItemInterface | null>(selectedPost as ListItemInterface | null);
 
+  const handleSave = () => {
+    console.log('save');
+  };
+
+  const [run] = useTimeoutFn(() => {
+    handleSave();
+  }, 3000);
+
   const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>): void => {
     if (editPost) {
       setEditPost({ ...editPost, title: e.target.value });
+      run();
     }
   };
 
   const onChangeContent = (e: React.FormEvent<HTMLDivElement>): void => {
     if (editPost) {
       setEditPost({ ...editPost, content: e.currentTarget.textContent || '' });
+      run();
     }
   };
 
