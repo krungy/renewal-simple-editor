@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { useAppDispatch } from 'store';
-import { changeSelectedPost, removeItem } from 'store/postsSlice';
+import { setSelectedPost, removeItem } from 'store/postsSlice';
 import { ListItemInterface } from 'types/types';
 
 interface ItemInterface {
@@ -10,7 +10,7 @@ const ListItem = ({ item }: ItemInterface) => {
   const dispatch = useAppDispatch();
 
   const onItemClick = () => {
-    dispatch(changeSelectedPost(item));
+    dispatch(setSelectedPost(item));
   };
 
   const onDeleteClick = (e: React.MouseEvent<HTMLButtonElement>) => {

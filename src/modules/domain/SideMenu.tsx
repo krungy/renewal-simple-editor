@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import ListItem from 'modules/components/ListItem';
 import { RootState, useAppDispatch, useAppSelector } from 'store';
 import { addItem } from 'store/postsSlice';
+import { ListItemInterface } from 'types/types';
 import { v4 as uuidv4 } from 'uuid';
 
 const SideMenu = () => {
@@ -9,10 +10,11 @@ const SideMenu = () => {
   const dispatch = useAppDispatch();
 
   const onAddClick = () => {
-    const newItem = {
+    const newItem: ListItemInterface = {
       id: uuidv4(),
       title: '',
       content: '',
+      parentsId: [],
       child: [],
     };
     dispatch(addItem(newItem));

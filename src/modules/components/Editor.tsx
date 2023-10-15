@@ -1,20 +1,23 @@
+import { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import useTimeoutFn from 'hooks/useTimeoutFn';
-import { useState } from 'react';
-import { RootState, useAppSelector } from 'store';
+import { RootState, useAppDispatch, useAppSelector } from 'store';
+import { changeItem } from 'store/postsSlice';
 import { ListItemInterface } from 'types/types';
+import { TIMEOUT_MS } from '../../constants';
 
 const Editor = () => {
+  const dispatch = useAppDispatch();
   const { selectedPost } = useAppSelector((state: RootState) => state.posts);
   const [editPost, setEditPost] = useState<ListItemInterface | null>(selectedPost as ListItemInterface | null);
 
-  const handleSave = () => {
-    console.log('save');
+  const handleSave = (): void => {
+    editPost && dispatch(changeItem(editPost));
   };
 
   const [run] = useTimeoutFn(() => {
     handleSave();
-  }, 3000);
+  }, TIMEOUT_MS);
 
   const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>): void => {
     if (editPost) {
@@ -23,12 +26,19 @@ const Editor = () => {
     }
   };
 
-  const onChangeContent = (e: React.FormEvent<HTMLDivElement>): void => {
+  const onChangeContent = (e: React.FormEvent<HTMLTextAreaElement>): void => {
     if (editPost) {
-      setEditPost({ ...editPost, content: e.currentTarget.textContent || '' });
+      setEditPost({ ...editPost, content: e.currentTarget.value || '' });
       run();
     }
   };
+
+  useEffect(() => {
+    if (selectedPost && editPost && selectedPost.id === editPost.id) {
+      return;
+    }
+    setEditPost(selectedPost);
+  }, [selectedPost, editPost]);
 
   return (
     <>
@@ -40,10 +50,10 @@ const Editor = () => {
         onChange={e => onChangeTitle(e)}
       />
       <EditorTextareaStyle
-        contentEditable="true"
         placeholder="내용을 입력하세요."
         spellCheck="false"
-        onInput={e => onChangeContent(e)}
+        value={editPost ? editPost.content : ''}
+        onChange={e => onChangeContent(e)}
       />
     </>
   );
@@ -60,7 +70,7 @@ const EditorInputStyle = styled.input`
   outline: none;
 `;
 
-const EditorTextareaStyle = styled.div`
+const EditorTextareaStyle = styled.textarea`
   padding: 12px;
   font-size: 16px;
   border: none;
@@ -68,4 +78,5 @@ const EditorTextareaStyle = styled.div`
   overflow-y: auto;
   outline: none;
   height: 90vh;
+  width: 100%;
 `;

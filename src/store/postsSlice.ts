@@ -1,4 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { updateItemDataInArray } from 'utils/lib';
 import { ListInterface, ListItemInterface } from 'types/types';
 
 interface InitialStateInterface {
@@ -16,27 +17,43 @@ const postsSlice = createSlice({
   initialState,
   reducers: {
     addItem: (state, action: PayloadAction<ListItemInterface>) => {
+      const { payload } = action;
+
       return {
         ...state,
-        posts: [...state.posts, action.payload],
+        posts: [...state.posts, payload],
+      };
+    },
+    changeItem: (state, action: PayloadAction<ListItemInterface>) => {
+      const { payload } = action;
+
+      return {
+        ...state,
+        posts: updateItemDataInArray(state.posts, payload),
       };
     },
     removeItem: (state, action: PayloadAction<ListItemInterface>) => {
+      const { payload } = action;
+
+      const selectedPost = state.selectedPost && state.selectedPost.id === payload.id ? null : state.selectedPost;
+
       return {
         ...state,
-        posts: state.posts.filter(el => el.id !== action.payload.id),
-        selectedPost: null,
+        posts: state.posts.filter(el => el.id !== payload.id),
+        selectedPost,
       };
     },
-    changeSelectedPost: (state, action: PayloadAction<ListItemInterface>) => {
+    setSelectedPost: (state, action: PayloadAction<ListItemInterface>) => {
+      const { payload } = action;
+
       return {
         ...state,
-        selectedPost: action.payload,
+        selectedPost: payload,
       };
     },
   },
 });
 
-export const { addItem, removeItem, changeSelectedPost } = postsSlice.actions;
+export const { addItem, changeItem, removeItem, setSelectedPost } = postsSlice.actions;
 
 export default postsSlice;
