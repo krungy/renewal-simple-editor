@@ -15,7 +15,7 @@ const Notion = () => {
   useEffect(() => {
     const savedData = getLocalStorage(POSTS_STORAGE_KEY);
 
-    if (savedData && savedData.length > 0) {
+    if (savedData) {
       dispatchRef.current(changeData({ key: 'posts', data: savedData }));
     }
   }, []);
