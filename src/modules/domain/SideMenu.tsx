@@ -2,16 +2,16 @@ import styled from '@emotion/styled';
 import { INITAL_POST } from '../../constants';
 import ListItem from 'modules/components/ListItem';
 import { RootState, useAppDispatch, useAppSelector } from 'store';
-import { addItem } from 'store/postsSlice';
+import { addPost } from 'store/postsSlice';
 import { flattenItems } from 'utils/lib';
 import { v4 as uuidv4 } from 'uuid';
 
 const SideMenu = () => {
-  const { posts } = useAppSelector((state: RootState) => state.posts);
   const dispatch = useAppDispatch();
+  const { posts } = useAppSelector((state: RootState) => state.posts);
 
   const onAddClick = () => {
-    dispatch(addItem({ ...INITAL_POST, id: uuidv4() }));
+    dispatch(addPost({ ...INITAL_POST, id: uuidv4() }));
   };
 
   return (

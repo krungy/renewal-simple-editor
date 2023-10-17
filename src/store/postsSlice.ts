@@ -7,6 +7,11 @@ interface InitialStateInterface {
   selectedPost: ListItemInterface | null;
 }
 
+interface ChangePayloadInterface {
+  key: string;
+  data: ListInterface | ListItemInterface;
+}
+
 const initialState: InitialStateInterface = {
   posts: [],
   selectedPost: null,
@@ -16,7 +21,7 @@ const postsSlice = createSlice({
   name: 'posts',
   initialState,
   reducers: {
-    addItem: (state, action: PayloadAction<ListItemInterface>) => {
+    addPost: (state, action: PayloadAction<ListItemInterface>) => {
       const { payload } = action;
       if (payload.parentsId.length > 0) {
         return {
@@ -29,7 +34,7 @@ const postsSlice = createSlice({
         posts: [...state.posts, payload],
       };
     },
-    changeItem: (state, action: PayloadAction<ListItemInterface>) => {
+    changePost: (state, action: PayloadAction<ListItemInterface>) => {
       const { payload } = action;
 
       return {
@@ -37,7 +42,7 @@ const postsSlice = createSlice({
         posts: updateItemDataInArray(state.posts, payload),
       };
     },
-    removeItem: (state, action: PayloadAction<ListItemInterface>) => {
+    removePost: (state, action: PayloadAction<ListItemInterface>) => {
       const { payload } = action;
 
       if (payload.parentsId.length > 0) {
@@ -55,6 +60,15 @@ const postsSlice = createSlice({
         selectedPost,
       };
     },
+    changeData: (state, action: PayloadAction<ChangePayloadInterface>) => {
+      const { payload } = action;
+      const { key, data } = payload;
+
+      return {
+        ...state,
+        [key]: data,
+      };
+    },
     setSelectedPost: (state, action: PayloadAction<ListItemInterface>) => {
       const { payload } = action;
 
@@ -66,6 +80,6 @@ const postsSlice = createSlice({
   },
 });
 
-export const { addItem, changeItem, removeItem, setSelectedPost } = postsSlice.actions;
+export const { addPost, changePost, removePost, changeData, setSelectedPost } = postsSlice.actions;
 
 export default postsSlice;

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import useTimeoutFn from 'hooks/useTimeoutFn';
 import { RootState, useAppDispatch, useAppSelector } from 'store';
-import { changeItem } from 'store/postsSlice';
+import { changePost } from 'store/postsSlice';
 import { ListItemInterface } from 'types/types';
 import { TIMEOUT_MS } from '../../constants';
 
@@ -12,10 +12,10 @@ const Editor = () => {
   const [editPost, setEditPost] = useState<ListItemInterface | null>(selectedPost as ListItemInterface | null);
 
   const handleSave = (): void => {
-    editPost && dispatch(changeItem(editPost));
+    editPost && dispatch(changePost(editPost));
   };
 
-  const [run] = useTimeoutFn(() => {
+  const [run] = useTimeoutFn((): void => {
     handleSave();
   }, TIMEOUT_MS);
 
@@ -33,7 +33,7 @@ const Editor = () => {
     }
   };
 
-  useEffect(() => {
+  useEffect((): void => {
     if (selectedPost && editPost && selectedPost.id === editPost.id) {
       return;
     }

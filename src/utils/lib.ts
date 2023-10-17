@@ -12,16 +12,11 @@ const findParentIds = (root: ListItemInterface, targetId: string, path: string[]
   if (root.child && Array.isArray(root.child)) {
     for (let i = 0; i < root.child.length; i++) {
       const child = root.child[i];
-      // const result =
       findParentIds(child, targetId, [...path, root.id]);
-
-      // if (result) {
-      //   return result;
-      // }
     }
   }
 
-  return null; // 아무것도 찾지 못한 경우
+  return null;
 };
 
 const addItemDataInArray = (
@@ -95,6 +90,26 @@ const handleAlert = (type: string) => {
   return window.confirm(msg);
 };
 
+const setLocalStorage = (key: string, data: any): void => {
+  try {
+    const stringifiedData = JSON.stringify(data);
+    localStorage.setItem(key, stringifiedData);
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+const getLocalStorage = (key: string): any | undefined => {
+  try {
+    const targetData = localStorage.getItem(key);
+
+    return targetData ? JSON.parse(targetData) : undefined;
+  } catch (e) {
+    console.error(e);
+    return undefined;
+  }
+};
+
 export {
   isEmptyObject,
   findParentIds,
@@ -103,4 +118,6 @@ export {
   removeItemDataInArray,
   flattenItems,
   handleAlert,
+  setLocalStorage,
+  getLocalStorage,
 };
