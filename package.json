@@ -9,6 +9,7 @@
     "axios": "^1.4.0",
     "classnames": "^2.3.2",
     "emotion-normalize": "^11.0.1",
+    "gh-pages": "^6.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.1.1",
@@ -17,11 +18,14 @@
   },
   "scripts": {
     "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
     "test:easy": "jest **/*/App.easy.spec.tsx",
     "test:hard": "jest **/*/App.hard.spec.tsx",
     "format": "prettier --check --ignore-path .gitignore .",
-    "format:fix": "prettier --write --ignore-path .gitignore ."
+    "format:fix": "prettier --write --ignore-path .gitignore .",
+    "deploy": "gh-pages -d build"
   },
+  "homepage": "https://krungy.github.io/renewal-simple-editor/",
   "eslintConfig": {
     "extends": [
       "react-app",
