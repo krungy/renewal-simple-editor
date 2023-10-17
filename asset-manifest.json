@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/renewal-simple-editor/static/css/main.233b3b67.css",
+    "main.js": "/renewal-simple-editor/static/js/main.1a34fbc8.js",
+    "index.html": "/renewal-simple-editor/index.html",
+    "main.233b3b67.css.map": "/renewal-simple-editor/static/css/main.233b3b67.css.map",
+    "main.1a34fbc8.js.map": "/renewal-simple-editor/static/js/main.1a34fbc8.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.233b3b67.css",
+    "static/js/main.1a34fbc8.js"
+  ]
+}
