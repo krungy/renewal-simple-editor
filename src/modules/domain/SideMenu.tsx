@@ -30,6 +30,9 @@ const SideMenu = () => {
 export default SideMenu;
 
 const SideMenuStyle = styled.div`
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
   height: 100%;
   left: 0;
   top: 0;
@@ -44,8 +47,8 @@ const HeaderStyle = styled.h3`
 `;
 
 const ListStyle = styled.ul`
-  margin: 12px 0 8px 0;
-  padding: 0 8px;
+  margin: 12px 4px 8px 2px;
+  padding: 0;
 `;
 
 const AddButtonStyle = styled.button`

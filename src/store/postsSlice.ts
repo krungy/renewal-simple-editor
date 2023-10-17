@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { addItemDataInArray, updateItemDataInArray } from 'utils/lib';
+import { addItemDataInArray, removeItemDataInArray, updateItemDataInArray } from 'utils/lib';
 import { ListInterface, ListItemInterface } from 'types/types';
 
 interface InitialStateInterface {
@@ -39,6 +39,13 @@ const postsSlice = createSlice({
     },
     removeItem: (state, action: PayloadAction<ListItemInterface>) => {
       const { payload } = action;
+
+      if (payload.parentsId.length > 0) {
+        return {
+          ...state,
+          posts: removeItemDataInArray(state.posts, payload, [...payload.parentsId]),
+        };
+      }
 
       const selectedPost = state.selectedPost && state.selectedPost.id === payload.id ? null : state.selectedPost;
 

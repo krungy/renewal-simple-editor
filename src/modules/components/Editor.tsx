@@ -63,6 +63,7 @@ export default Editor;
 
 const EditorInputStyle = styled.input`
   border: none;
+  width: 100%;
   height: 24px;
   padding: 12px;
   font-size: 24px;
