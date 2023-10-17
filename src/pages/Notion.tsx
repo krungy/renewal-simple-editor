@@ -6,6 +6,7 @@ import { useEffect, useRef } from 'react';
 import { RootState, useAppDispatch, useAppSelector } from 'store';
 import { getLocalStorage, setLocalStorage } from 'utils/lib';
 import { changeData } from 'store/postsSlice';
+import useDidMountEffect from 'hooks/useDidMountEffect';
 
 const Notion = () => {
   const dispatch = useAppDispatch();
@@ -20,10 +21,8 @@ const Notion = () => {
     }
   }, []);
 
-  useEffect(() => {
-    if (posts.length > 0) {
-      setLocalStorage(POSTS_STORAGE_KEY, posts);
-    }
+  useDidMountEffect(() => {
+    setLocalStorage(POSTS_STORAGE_KEY, posts);
   }, [posts]);
 
   return (
