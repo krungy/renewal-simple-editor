@@ -18,11 +18,11 @@
   },
   "scripts": {
     "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
     "test:easy": "jest **/*/App.easy.spec.tsx",
     "test:hard": "jest **/*/App.hard.spec.tsx",
     "format": "prettier --check --ignore-path .gitignore .",
     "format:fix": "prettier --write --ignore-path .gitignore .",
+    "predeploy": "yarn run build",
     "deploy": "gh-pages -d build"
   },
   "homepage": "https://krungy.github.io/renewal-simple-editor/",
