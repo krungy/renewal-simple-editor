@@ -2,7 +2,7 @@ export interface ListItemInterface {
   id: string;
   title: string;
   content: string;
-  parentsId: [];
+  parentsId: string[];
   child: ListItemInterface[] | [];
 }
 

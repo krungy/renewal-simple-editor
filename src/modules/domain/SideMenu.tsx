@@ -1,8 +1,9 @@
 import styled from '@emotion/styled';
+import { INITAL_POST } from '../../constants';
 import ListItem from 'modules/components/ListItem';
 import { RootState, useAppDispatch, useAppSelector } from 'store';
 import { addItem } from 'store/postsSlice';
-import { ListItemInterface } from 'types/types';
+import { flattenItems } from 'utils/lib';
 import { v4 as uuidv4 } from 'uuid';
 
 const SideMenu = () => {
@@ -10,21 +11,14 @@ const SideMenu = () => {
   const dispatch = useAppDispatch();
 
   const onAddClick = () => {
-    const newItem: ListItemInterface = {
-      id: uuidv4(),
-      title: '',
-      content: '',
-      parentsId: [],
-      child: [],
-    };
-    dispatch(addItem(newItem));
+    dispatch(addItem({ ...INITAL_POST, id: uuidv4() }));
   };
 
   return (
     <SideMenuStyle>
       <HeaderStyle>개인 페이지</HeaderStyle>
       <ListStyle>
-        {posts.map((item, index) => (
+        {flattenItems(posts).map((item, index) => (
           <ListItem item={item} key={index} />
         ))}
       </ListStyle>
@@ -51,6 +45,7 @@ const HeaderStyle = styled.h3`
 
 const ListStyle = styled.ul`
   margin: 12px 0 8px 0;
+  padding: 0 8px;
 `;
 
 const AddButtonStyle = styled.button`
@@ -60,7 +55,7 @@ const AddButtonStyle = styled.button`
   border-radius: 4px;
   padding: 4px;
   cursor: pointer;
-  &hover: {
+  :hover {
     background-color: #e8e7e4;
   }
 `;

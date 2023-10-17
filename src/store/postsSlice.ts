@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { updateItemDataInArray } from 'utils/lib';
+import { addItemDataInArray, updateItemDataInArray } from 'utils/lib';
 import { ListInterface, ListItemInterface } from 'types/types';
 
 interface InitialStateInterface {
@@ -18,7 +18,12 @@ const postsSlice = createSlice({
   reducers: {
     addItem: (state, action: PayloadAction<ListItemInterface>) => {
       const { payload } = action;
-
+      if (payload.parentsId.length > 0) {
+        return {
+          ...state,
+          posts: addItemDataInArray(state.posts, payload, [...payload.parentsId]),
+        };
+      }
       return {
         ...state,
         posts: [...state.posts, payload],
