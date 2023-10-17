@@ -15,7 +15,7 @@ const Editor = () => {
     editPost && dispatch(changePost(editPost));
   };
 
-  const [run] = useTimeoutFn((): void => {
+  const [run] = useTimeoutFn(() => {
     handleSave();
   }, TIMEOUT_MS);
 
@@ -33,7 +33,7 @@ const Editor = () => {
     }
   };
 
-  useEffect((): void => {
+  useEffect(() => {
     if (selectedPost && editPost && selectedPost.id === editPost.id) {
       return;
     }

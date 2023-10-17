@@ -7,3 +7,17 @@ export interface ListItemInterface {
 }
 
 export type ListInterface = ListItemInterface[] | [];
+
+export interface ItemInterface {
+  item: ListItemInterface;
+}
+
+export interface InitialStateInterface {
+  posts: ListInterface;
+  selectedPost: ListItemInterface | null;
+}
+
+export interface ChangePayloadInterface {
+  key: string;
+  data: ListInterface | ListItemInterface;
+}

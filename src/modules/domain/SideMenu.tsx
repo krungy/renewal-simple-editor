@@ -10,7 +10,7 @@ const SideMenu = () => {
   const dispatch = useAppDispatch();
   const { posts } = useAppSelector((state: RootState) => state.posts);
 
-  const onAddClick = () => {
+  const onAddClick = (): void => {
     dispatch(addPost({ ...INITAL_POST, id: uuidv4() }));
   };
 

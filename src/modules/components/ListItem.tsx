@@ -2,27 +2,23 @@ import styled from '@emotion/styled';
 import { DEPTH_LIMIT, INITAL_POST } from '../../constants';
 import { useAppDispatch } from 'store';
 import { setSelectedPost, removePost, addPost } from 'store/postsSlice';
-import { ListItemInterface } from 'types/types';
+import { ItemInterface } from 'types/types';
 import { v4 as uuidv4 } from 'uuid';
 import { handleAlert } from 'utils/lib';
-
-interface ItemInterface {
-  item: ListItemInterface;
-}
 
 const ListItem = ({ item }: ItemInterface) => {
   const dispatch = useAppDispatch();
 
-  const onItemClick = () => {
+  const onItemClick = (): void => {
     dispatch(setSelectedPost(item));
   };
 
-  const onAddClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const onAddClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
     e.stopPropagation();
     dispatch(addPost({ ...INITAL_POST, id: uuidv4(), parentsId: [...item.parentsId, item.id] }));
   };
 
-  const onDeleteClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const onDeleteClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
     e.stopPropagation();
 
     const alertType = item.child.length > 0 ? 'depthDelete' : 'delete';

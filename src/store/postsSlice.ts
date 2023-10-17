@@ -1,16 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { addItemDataInArray, removeItemDataInArray, updateItemDataInArray } from 'utils/lib';
-import { ListInterface, ListItemInterface } from 'types/types';
-
-interface InitialStateInterface {
-  posts: ListInterface;
-  selectedPost: ListItemInterface | null;
-}
-
-interface ChangePayloadInterface {
-  key: string;
-  data: ListInterface | ListItemInterface;
-}
+import { ChangePayloadInterface, InitialStateInterface, ListItemInterface } from 'types/types';
 
 const initialState: InitialStateInterface = {
   posts: [],
